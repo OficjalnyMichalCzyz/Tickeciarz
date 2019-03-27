@@ -1,0 +1,50 @@
+*{
+}
+html,body{
+  width:100%;
+  height:100%;
+  margin:none;
+}
+.ticket_lewy_10v5{
+  width: 100%;
+  height: 11%;
+  border-style: outset;
+  border:3px,black;
+  text-align: center;
+  display:block;
+  float:left;
+}
+.ticket_srodkowy_80v25{
+  width: 100%;
+  height: 90%;
+  border-style: outset;
+  border:3px,black;
+}
+.ticket_srodkowy_100v10{
+  width: 100%;
+  height: 10%;
+  border-style: outset;
+  border:3px,black;
+}
+.pojemnik_srodkowy,.pojemnik_lewy{
+  display:block;
+  float:left;
+}
+.pojemnik_lewy{
+  width:10%;
+  height:100%;
+
+}
+.pojemnik_srodkowy{
+  width:50%;
+  height:100%;
+}
+.centrowanie{
+  margin:auto;
+}
+.odstep{
+  height: 90%;
+  width: 5%;
+  display:block;
+  float:left;
+}
