@@ -1,8 +1,8 @@
 # Tickeciarz
 Mała oraz prosta WebAppka do obsługi zgłoszeń (nieskończona).
 
-Prosta aplikacja robiona bez większego planu. Głównym celem tego programu jest obsługa zgłoszeń, ich rozdysponowanie, kierowanie uprawnieniami
-oraz ich tworzenie. Aktualnie aplikacja stoi na fazie "modyfikacji zgłoszenia" które planuje zaimplementować.
+Prosta aplikacja robiona bez większego planu. Głównym celem tego programu jest obsługa zgłoszeń, ich rozdysponowanie, 
+kierowanie uprawnieniami oraz ich tworzenie. Aktualnie aplikacja stoi na fazie "modyfikacji zgłoszenia" które planuje zaimplementować.
 DO ZROBIENIA
 Modyfikacja zgłoszeń
 Panel Admina
