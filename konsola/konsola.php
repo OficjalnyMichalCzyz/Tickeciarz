@@ -17,14 +17,14 @@ echo "
 function konsola($wiadomosc)
 {
 echo "<script>
-document.getElementById('Konsola').innerHTML = document.getElementById('Konsola').innerHTML + '<br>" . $wiadomosc . "';
+document.getElementById('Konsola').innerHTML = document.getElementById('Konsola').innerHTML + '<br>" . __LINE__ . " " . $wiadomosc . "';
 var scroller = document.getElementById('Konsola');
 scroller.scrollTop = scroller.scrollHeight;
 </script>";
 }
 echo "<script>
 document.addEventListener('keypress', function onPress(event) {
-    if (event.key === 'z') {
+    if (event.key === '`') {
         if(document.getElementById('Konsola').style.display == 'none'){
         document.getElementById('Konsola').style.display = 'block';
       }else{

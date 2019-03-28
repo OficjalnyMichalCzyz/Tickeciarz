@@ -8,14 +8,18 @@
  <link rel="stylesheet" type="text/css" href="tabele.css">
  <body>
 <?php
-if(isset($_POST['klient']) || isset($_POST['przypisany_na']) || isset($_POST['miejsce']) || isset($_POST['naglowek']) || isset($_POST['tresc'])){
+if(isset($_POST['Klient']) || isset($_POST['Przypisany_na']) || isset($_POST['Miejsce']) || isset($_POST['Naglowek']) || isset($_POST['Tresc'])){
+                      konsola(__LINE__ . ' Wykonuje ISSET$POST.');
   Pobierz_Uprawnienia_Uzytkownika();
   Pobierz_Uprawnienia_Zgloszenia($_GET["id"]);
   Sprawdz_Uprawnienia($poziom_uprawnien_zgloszenia, $poziom_uprawnien_uzytkownika);
-  $zapytanie = $login->prepare("UPDATE zgloszenia SET naglowek = ?, tresc = ?, miejsce = ?, kto_pracuje_nad_ticketem = ?, klient = ?, WHERE nazwa_uzytkownika = ?");
-      $zapytanie->bind_param("ssss", $wygenerowany_token, $data, $ip_uzytkownika, $wpisany_login);
-      $zapytanie->execute();
-      $zapytanie->close();
+    $zapytanie = $login->prepare("UPDATE zgloszenia SET naglowek = ?, tresc = ?, miejsce = ?, kto_pracuje_nad_ticketem = ?, klient = ?, ostatnia_modyfikacja = ? WHERE INC_id = ?");
+        $naglowek = $_POST['naglowek']; $tresc = $_POST['tresc']; $miejsce = $_POST['miejsce']; $przypisany_na = $_POST['przypisany_na']; $klient = $_POST['klient']; $data = date("H:i:s m/d/Y "); $id = $_GET["id"];
+        $zapytanie->bind_param("sssiisi", $naglowek, $tresc, $miejsce, $przypisany_na, $klient, $data, $id);
+        $zapytanie->execute();
+        if($zapytanie->affected_rows===0){konsola('Błąd - nie zaktualizowano żadnego wpisu podczas modyfikacji zgłoszenia.');}
+        $zapytanie->close();
+        konsola(__LINE__ . ' Skonczylem zapytanie z aktualizacją zgłoszenia. Zmieniono lini: ' . $zapytanie->affected_rows);
 }
 
 if(isset($_GET["id"])){
@@ -72,12 +76,13 @@ document.getElementById('przypisany_na').value = document.getElementById('przypi
 document.getElementById('miejsce').value = document.getElementById('miejsce_wpisany').innerHTML;
 document.getElementById('naglowek').value = document.getElementById('naglowek_wpisany').innerHTML;
 document.getElementById('tresc').value = document.getElementById('tresc_wpisana').innerHTML;
+document.getElementById("form_do_wyslania").submit();
 }
 
 
 
 </script>
-                <form style="margin-left:35%;" method='POST'>
+                <form style="margin-left:35%;" method='POST' id='form_do_wyslania'>
                   <input type='hidden' id='klient' name='Klient'>
                   <input type='hidden' id='przypisany_na' name='Przypisany_na'>
                   <input type='hidden' id='miejsce' name='Miejsce'>
@@ -85,7 +90,7 @@ document.getElementById('tresc').value = document.getElementById('tresc_wpisana'
                   <input type='hidden' id='naglowek' name='Naglowek'>
                   <input type='hidden' id='tresc' name='Tresc'>
                   <h3>Zatwierdź modyfikacje</h3>
-                  <button style='width: 170px;'type='submit'>Zatwierdź</button>
+                  <button style='width: 170px;'type='button' onclick="Przeladuj_dane()">Zatwierdź</button>
                 </form>
                   <br />
                   <a style="margin-left:35%;" href='../zalogowano.php'>Powrót</a>

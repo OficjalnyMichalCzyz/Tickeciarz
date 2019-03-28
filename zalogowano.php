@@ -22,6 +22,8 @@
   Pobierz_Uprawnienia_Uzytkownika();
   $ilosc_wyswietlonych_zgloszen = 0;
 
+
+
   if ($zapytanie = $login->prepare("SELECT * FROM zgloszenia")){
       $zapytanie->execute();// ID     UPR    NAGL TRESC   MIEJS  KUT    WT     KPT    LSTMD
       $zapytanie->bind_result($kolumna1, $kolumna2, $kolumna3, $kolumna4, $kolumna5, $kolumna6, $kolumna7, $kolumna8, $kolumna9);
