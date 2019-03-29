@@ -33,8 +33,8 @@ function Sprawdz_Uprawnienia($poziom_uprawnien_zgloszenia, $poziom_uprawnien_uzy
     echo "<a href='zalogowano.php'>Powrót</a>";
     exit();
   } else {
-  konsola("Wystarczające uprawnienia.");
-  konsola("Pobrane uprawnienia użytkownika to: " . $poziom_uprawnien_uzytkownika);
-  konsola("Pobrane uprawnienia zgłoszenia to: " . $poziom_uprawnien_zgloszenia);
+  konsola("Wystarczające uprawnienia.", $tl = __LINE__, $tl . "/funkcje.php");
+  konsola("Pobrane uprawnienia użytkownika to: " . $poziom_uprawnien_uzytkownika, $tl = __LINE__, $tl . "/funkcje.php");
+  konsola("Pobrane uprawnienia zgłoszenia to: " . $poziom_uprawnien_zgloszenia, $tl = __LINE__, $tl . "/funkcje.php");
 }}
  ?>

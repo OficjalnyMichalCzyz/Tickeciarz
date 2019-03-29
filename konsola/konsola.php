@@ -14,10 +14,10 @@ echo "
   color: white;
   display:none;
 '>Konsola<br></div>";
-function konsola($wiadomosc)
+function konsola($wiadomosc, $nic, $linia)
 {
 echo "<script>
-document.getElementById('Konsola').innerHTML = document.getElementById('Konsola').innerHTML + '<br>" . __LINE__ . " " . $wiadomosc . "';
+document.getElementById('Konsola').innerHTML = document.getElementById('Konsola').innerHTML + '<br>" . $linia . " " . $wiadomosc . "';
 var scroller = document.getElementById('Konsola');
 scroller.scrollTop = scroller.scrollHeight;
 </script>";

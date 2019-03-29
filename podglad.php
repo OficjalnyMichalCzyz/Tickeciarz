@@ -9,17 +9,23 @@
  <body>
 <?php
 if(isset($_POST['Klient']) || isset($_POST['Przypisany_na']) || isset($_POST['Miejsce']) || isset($_POST['Naglowek']) || isset($_POST['Tresc'])){
-                      konsola(__LINE__ . ' Wykonuje ISSET$POST.');
+                      konsola('Wykonuje ISSET$POST.', $tl = __LINE__, $tl);
+                      konsola($_POST['Klient'], $tl = __LINE__, $tl);
+                      konsola($_POST['Przypisany_na'], $tl = __LINE__, $tl);
+                      konsola($_POST['Miejsce'], $tl = __LINE__, $tl);
+                      konsola($_POST['Naglowek'], $tl = __LINE__, $tl);
+                      konsola($_POST['Tresc'], $tl = __LINE__, $tl);
   Pobierz_Uprawnienia_Uzytkownika();
   Pobierz_Uprawnienia_Zgloszenia($_GET["id"]);
   Sprawdz_Uprawnienia($poziom_uprawnien_zgloszenia, $poziom_uprawnien_uzytkownika);
-    $zapytanie = $login->prepare("UPDATE zgloszenia SET naglowek = ?, tresc = ?, miejsce = ?, kto_pracuje_nad_ticketem = ?, klient = ?, ostatnia_modyfikacja = ? WHERE INC_id = ?");
-        $naglowek = $_POST['naglowek']; $tresc = $_POST['tresc']; $miejsce = $_POST['miejsce']; $przypisany_na = $_POST['przypisany_na']; $klient = $_POST['klient']; $data = date("H:i:s m/d/Y "); $id = $_GET["id"];
+    $zapytanie = $login->prepare("UPDATE zgloszenia SET naglowek = ?, tresc = ?, miejsce = ?, kto_pracuje_nad_ticketem = ?, wlasciciel_ticketu = ?, ostatnia_modyfikacja = ? WHERE ID_inc = ?");
+        $naglowek = $_POST['Naglowek']; $tresc = $_POST['Tresc']; $miejsce = $_POST['Miejsce']; $przypisany_na = $_POST['Przypisany_na']; $klient = $_POST['Klient']; $data = date_create()->format('H:i:s m/d/Y'); $id = $_GET["id"];
         $zapytanie->bind_param("sssiisi", $naglowek, $tresc, $miejsce, $przypisany_na, $klient, $data, $id);
         $zapytanie->execute();
-        if($zapytanie->affected_rows===0){konsola('Błąd - nie zaktualizowano żadnego wpisu podczas modyfikacji zgłoszenia.');}
+        if($zapytanie->affected_rows===0){konsola('Błąd - nie zaktualizowano żadnego wpisu podczas modyfikacji zgłoszenia.', $tl = __LINE__, $tl);}
+        konsola(' Skonczylem zapytanie z aktualizacją zgłoszenia. Zmieniono lini: ' . $zapytanie->affected_rows, $tl = __LINE__, $tl);
         $zapytanie->close();
-        konsola(__LINE__ . ' Skonczylem zapytanie z aktualizacją zgłoszenia. Zmieniono lini: ' . $zapytanie->affected_rows);
+
 }
 
 if(isset($_GET["id"])){
@@ -32,6 +38,7 @@ if(isset($_GET["id"])){
       $zapytanie->bind_result($kolumna1, $poziom_uprawnien_zgloszenia, $kolumna3, $kolumna4, $kolumna5, $kolumna6, $kolumna7, $kolumna8, $kolumna9);
       $zapytanie->fetch();
             if($poziom_uprawnien_uzytkownika>=$poziom_uprawnien_zgloszenia){
+              konsola('Wyświetlam zgłoszenie.', $tl = __LINE__, $tl);
               echo "
               <div style='width:100%;height:30%;padding-bottom:20px;'>
               <div class='pojemnik_lewy'>
@@ -39,8 +46,8 @@ if(isset($_GET["id"])){
               <div style='background-color:#85C1E9;' class='ticket_lewy_10v5'>Treść: </div>
                 </div>
               <div class='pojemnik_srodkowy'>
-              <b><div style='background-color:#AED6F1;' id='tresc_wpisana' class='ticket_srodkowy_100v10' contentEditable=true>" . $kolumna3 . "</div>
-              <div style='background-color:#AED6F1;' id='naglowek_wpisany' class='ticket_srodkowy_80v25' contentEditable=true>" . $kolumna4 . "</div></b>
+              <b><div style='background-color:#AED6F1;' id='tresc_wpisana' class='ticket_srodkowy_100v10' contentEditable=true>" . $kolumna4 . "</div>
+              <div style='background-color:#AED6F1;' id='naglowek_wpisany' class='ticket_srodkowy_80v25' contentEditable=true>" . $kolumna3 . "</div></b>
                 </div>
                 <div class='pojemnik_lewy'>
                 <div style='background-color:#85C1E9;' class='ticket_lewy_10v5'>Numer incydentu:</div>
