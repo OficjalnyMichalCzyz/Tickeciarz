@@ -8,4 +8,3 @@ Modyfikacja zgłoszeń
 Panel Admina
 Łączenie ID z imionami i nazwiskami
 Proste API do tworzenia ticketów za pomocą innych aplikacji np. do monitorowania (najprawdopodobniej za pomocą GET)
-K O M E N T A R Z E
